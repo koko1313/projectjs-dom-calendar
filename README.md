@@ -26,6 +26,7 @@ var mySubElement = myElement.get(element); // element - id (#) или class (.)
 ```javascript
 // element - елемента като string (например "ul")
 // elementId - id на новия елемент (не е задължително)
+// връща добавения елемент
 myElement.append(element, elementId);
 ```
 
