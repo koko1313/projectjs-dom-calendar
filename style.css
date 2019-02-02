@@ -1,0 +1,23 @@
+.calendar {
+    border: 2px solid black;
+    border-spacing: 5px;
+}
+
+.calendar td {
+    border: 1px dashed gray;
+    padding: 5px;
+    margin: 5px;
+}
+
+.calendar-buttons {
+    text-align: center;
+    cursor: pointer;
+}
+
+.calendar-inputs {
+    width: 50px;
+}
+
+.today {
+    background: red;
+}

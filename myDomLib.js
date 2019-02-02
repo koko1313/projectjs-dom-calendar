@@ -1,4 +1,10 @@
 var myDomLib = {
+
+    /**
+     * Съдържа всички елементи, създадени от библиотеката
+     */
+    allElements: [],
+
     /**
      * Връща елемент по зададено id
      * @param {string} element #id или .class на елемента (при .class връща само първия срещнат)
@@ -151,6 +157,7 @@ var myDomLib = {
         };
 
         elementObject.set(element);
+        this.allElements.push(elementObject);
         return elementObject;
     },
 };
