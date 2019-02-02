@@ -6,8 +6,6 @@ var eventify = function(arr, callback) {
     };
 };
 
-var year = 2019;
-var month = 5;
 var today = new Date().getDate();
 
 // при добавяне на елемент в масива myDomLib.allElements
