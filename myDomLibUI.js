@@ -18,8 +18,10 @@ var calendar = {
     drawCalendar: function(pushedElement) {
         var calendarTable = pushedElement.append("table");
         calendarTable.appendAttr("class", "calendar");
-        calendarTable.appendHTML("<tr> <td id='prevMonthButton' class='calendar-buttons'> < </td> <td colspan='5' style='text-align: center'>" + "<input id='monthInput' class='calendar-inputs' value=" + globalMonth + ">." + "<input id='yearInput' class='calendar-inputs' value=" + globalYear + ">" + "<button id='calendarGoToButton'>Go</button>" +"</td> <td id='nextMonthButton' class='calendar-buttons'> > </td> </tr>");
-        calendarTable.appendHTML("<tr> <td>Пн</td> <td>Вт</td> <td>Ср</td> <td>Чт</td> <td>Пт</td> <td>Сб</td> <td>Нд</td> </tr>");
+
+        this.addCalendarControls(calendarTable);
+
+        this.addCalendarDaysTitle(calendarTable);
         
         this.addEvents(pushedElement); // добавяме събитията към бутоните
 
@@ -70,7 +72,6 @@ var calendar = {
 
     addEvents: function(pushedElement) {
         myDomLib.get("#prevMonthButton").addEvent("click", function() {
-
             globalMonth--;
             if(globalMonth < 1) {
                 globalMonth = 12;
@@ -98,6 +99,54 @@ var calendar = {
             pushedElement.appendHTML("", true); // изчистваме предишния календар
             pushedElement.calendar(year, month);
         });
+    },
+
+    /**
+     * Добавя контролите на календара (предишен, следващ месец, ...)
+     * @param {object} calendarTable
+     */
+    addCalendarControls: function(calendarTable) {
+        var tr = calendarTable.append("tr");
+
+        // previous month бутона
+        var previousMonthButton = tr.append("td", "prevMonthButton");
+            previousMonthButton.appendAttr("class", "calendar-buttons");
+            previousMonthButton.appendText("<");
+
+        // колона с input полетата на календара
+        var td = tr.append("td");
+            td.appendAttr("colspan", "5");
+            td.appendAttr("style", "text-align: center");
+
+        // input с месеца
+        var input = td.append("input", "monthInput");
+            input.appendAttr("class", "calendar-inputs");
+            input.appendAttr("value", globalMonth);
+
+        // input с годината
+        var input = td.append("input", "yearInput");
+            input.appendAttr("class", "calendar-inputs");
+            input.appendAttr("value", globalYear);
+
+        // бутона на календара
+        var button = td.append("button", "calendarGoToButton");
+            button.appendText("Go");
+
+        // next month бутона
+        var td = tr.append("td", "nextMonthButton");
+            td.appendAttr("class", "calendar-buttons");
+            td.appendText(">");
+    },
+
+    addCalendarDaysTitle: function(calendarTable) {
+        var tr = calendarTable.append("tr");
+        tr.append("td").appendText("Пн");
+        tr.append("td").appendText("Вт");
+        tr.append("td").appendText("Ср");
+        tr.append("td").appendText("Чт");
+        tr.append("td").appendText("Пт");
+        tr.append("td").appendText("Сб");
+        tr.append("td").appendText("Нд");
     },
 };
 
