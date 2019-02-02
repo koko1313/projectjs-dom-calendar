@@ -136,10 +136,15 @@ var myDomLib = {
              * Връща децата на елемент
              * @returns {Array} масив с елементите, които са деца
              */
-            getChildrens: function() {
+            getChildren: function() {
                 return this.element.children;
             },
 
+            /**
+             * Добавя събитие на елемент
+             * @param {string} event събитие
+             * @param {string} callback callback функция
+             */
             addEvent: function(event, callback) {
                 this.element.addEventListener(event, callback);
             },
