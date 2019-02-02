@@ -3,7 +3,10 @@
 
 ## Файлове
 - **index.html**
+- **script.js** - *Клиентския скритпов файл, чрез него клиента ще работи с библиотеката*
+- **style.css** - *Стиловете за UI компонентите*
 - **myDomLib.js** - *Библиотеката за работа с DOM дървото*
+- **myDomLibUI.js** - *UI библиотеката*
 
 ## myDomLib.js - Функционалности с примери
 
@@ -88,4 +91,11 @@ var childrenCollection = myElement.getChildren(); // връща масив с е
 // event - събитие
 // callback - callback функция
 myElement.addEvent(event, callback);
+```
+
+## myDomLibUI.js - Функционалности с примери
+**Указване на календар**
+```javascript
+myElement.calendar(); // календар с текущата дата
+myElement.calendar(year, month); // календар с указани година и месец
 ```
