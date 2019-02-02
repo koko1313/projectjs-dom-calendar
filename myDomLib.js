@@ -17,7 +17,11 @@ var myDomLib = {
 
             // set-ва елемента
             set: function(element) {
-                elementObject.element = document.querySelector(element);
+                if(element[0] == "#" || element[0] == ".") {
+                    elementObject.element = document.querySelector(element);
+                } else {
+                    elementObject.element = element;
+                }
             },
 
             // и тук има функция get, за да може да се прави вложен get
@@ -32,6 +36,7 @@ var myDomLib = {
              * Добавя елемент
              * @param {string} element елемента, който ще се създаде
              * @param {string} elementId id на елемента, който ще се създаде
+             * @returns {object} връща добавения елемент като обект от вида на myDomLib
              */
             append: function(element, elementId) {
                 var parentElement = this.element;
@@ -43,6 +48,7 @@ var myDomLib = {
                 }
 
                 parentElement.appendChild(newElement);
+                return myDomLib.get(newElement);
             },
 
             /**

@@ -23,14 +23,12 @@ eventify(myDomLib.allElements, function() {
             month = new Date().getMonth()+1;
         }
 
-        pushedElement.append("table", "calendarTable");
-
         var daysInMoth = new Date(year, month, 0).getDate(); // броя на дните в месеца
         var firstDayOfMoth = new Date(year, month-1).getDay(); // първия ден от месеца (като дата)
         var currentDay = 1; // инициализираме първия ден (брояч), за да попълним календара 
         var endMonth = false;
 
-        var table = myDomLib.get("#calendarTable");
+        var table = pushedElement.append("table");
         table.appendAttr("class", "calendar");
         table.appendHTML("<tr> <td id='prevMonthButton' class='calendar-buttons'> < </td> <td colspan='5' style='text-align: center'>" + "<input id='monthInput' class='calendar-inputs' value=" + month + ">." + "<input id='yearInput' class='calendar-inputs' value=" + year + ">" + "<button id='calendarGoToButton'>Go</button>" +"</td> <td id='nextMonthButton' class='calendar-buttons'> > </td> </tr>");
         table.appendHTML("<tr> <td>Пн</td> <td>Вт</td> <td>Ср</td> <td>Чт</td> <td>Пт</td> <td>Сб</td> <td>Нд</td> </tr>");
@@ -67,13 +65,11 @@ eventify(myDomLib.allElements, function() {
         // до 6, защото ще break-нем цикъла, когато полълним всички дни
         for(var i=1; i<=6; i++) {
             // добавяме ред
-            table.append("tr", "r"+i);
-            var tr = myDomLib.get("#r"+i);
+            var tr = table.append("tr");
 
             for(var j=1; j<=7; j++) {
                 // добавяме колона към реда
-                tr.append("td", "r"+i+"c"+j);
-                var td = myDomLib.get("#r"+i+"c"+j);
+                var td = tr.append("td");
 
                 // отбелязваме днешния ден
                 if(currentDay == today) {
