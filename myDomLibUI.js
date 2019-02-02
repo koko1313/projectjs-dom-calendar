@@ -19,11 +19,9 @@ var calendar = {
         var calendarTable = pushedElement.append("table");
         calendarTable.appendAttr("class", "calendar");
 
-        this.addCalendarControls(calendarTable);
+        this.addCalendarControls(calendarTable, pushedElement);
 
         this.addCalendarDaysTitle(calendarTable);
-        
-        this.addEvents(pushedElement); // добавяме събитията към бутоните
 
         var today = new Date().getDate();
         var daysInMoth = new Date(globalYear, globalMonth, 0).getDate(); // броя на дните в месеца
@@ -70,48 +68,29 @@ var calendar = {
         return calendarTable;
     },
 
-    addEvents: function(pushedElement) {
-        myDomLib.get("#prevMonthButton").addEvent("click", function() {
-            globalMonth--;
-            if(globalMonth < 1) {
-                globalMonth = 12;
-                globalYear--;
-            }
-
-            pushedElement.appendHTML("", true); // изчистваме предишния календар
-            pushedElement.calendar(globalYear, globalMonth);
-        });
-
-        myDomLib.get("#nextMonthButton").addEvent("click", function() {
-            globalMonth++;
-            if(globalMonth > 12) {
-                globalMonth = 1;
-                globalYear++;
-            }
-
-            pushedElement.appendHTML("", true); // изчистваме предишния календар
-            pushedElement.calendar(globalYear, globalMonth);
-        });
-
-        myDomLib.get("#calendarGoToButton").addEvent("click", function() {
-            var month = myDomLib.get("#monthInput").element.value;
-            var year = myDomLib.get("#yearInput").element.value;
-            pushedElement.appendHTML("", true); // изчистваме предишния календар
-            pushedElement.calendar(year, month);
-        });
-    },
-
     /**
      * Добавя контролите на календара (предишен, следващ месец, ...)
      * @param {object} calendarTable
+     * @param {object} pushedElement
      */
-    addCalendarControls: function(calendarTable) {
+    addCalendarControls: function(calendarTable, pushedElement) {
         var tr = calendarTable.append("tr");
 
         // previous month бутона
         var previousMonthButton = tr.append("td", "prevMonthButton");
             previousMonthButton.appendAttr("class", "calendar-buttons");
             previousMonthButton.appendText("<");
+            
+            previousMonthButton.addEvent("click", function(){
+                globalMonth--;
+                if(globalMonth < 1) {
+                    globalMonth = 12;
+                    globalYear--;
+                }
+
+                pushedElement.appendHTML("", true); // изчистваме предишния календар
+                pushedElement.calendar(globalYear, globalMonth);
+            });
 
         // колона с input полетата на календара
         var td = tr.append("td");
@@ -132,10 +111,28 @@ var calendar = {
         var button = td.append("button", "calendarGoToButton");
             button.appendText("Go");
 
+            button.addEvent("click", function() {
+                var month = myDomLib.get("#monthInput").element.value;
+                var year = myDomLib.get("#yearInput").element.value;
+                pushedElement.appendHTML("", true); // изчистваме предишния календар
+                pushedElement.calendar(year, month);
+            });
+
         // next month бутона
-        var td = tr.append("td", "nextMonthButton");
-            td.appendAttr("class", "calendar-buttons");
-            td.appendText(">");
+        var nextMonthButton = tr.append("td", "nextMonthButton");
+            nextMonthButton.appendAttr("class", "calendar-buttons");
+            nextMonthButton.appendText(">");
+
+            nextMonthButton.addEvent("click", function() {
+                globalMonth++;
+                if(globalMonth > 12) {
+                    globalMonth = 1;
+                    globalYear++;
+                }
+
+                pushedElement.appendHTML("", true); // изчистваме предишния календар
+                pushedElement.calendar(globalYear, globalMonth);
+            });
     },
 
     addCalendarDaysTitle: function(calendarTable) {
