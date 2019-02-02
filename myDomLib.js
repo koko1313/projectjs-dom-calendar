@@ -1,4 +1,9 @@
 var myDomLib = {
+    /**
+     * Връща елемент по зададено id
+     * @param {string} element #id или .class на елемента (при .class връща само първия срещнат)
+     * @returns {object} връща обекта, съдържащ елемента, заедно с всички негови методи
+     */
     get: function(element) {
         var elementObject = {
 
@@ -133,10 +138,14 @@ var myDomLib = {
              */
             getChildrens: function() {
                 return this.element.children;
-            }
-        }
+            },
+
+            addEvent: function(event, callback) {
+                this.element.addEventListener(event, callback);
+            },
+        };
 
         elementObject.set(element);
         return elementObject;
-    }
+    },
 };
