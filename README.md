@@ -61,6 +61,12 @@ var text = myElement.getHTML();
 myElement.appendAttr(attr, attrValue);
 ```
 
+**Добавяне на клас към елемент**
+```javascript
+// className - името на класа
+myElement.appenClass(cnassName);
+```
+
 **Добавяне на стил към елемент**
 ```javascript
 // styleCollection - масив с колекции от вида {property: "color", value: "red"}
