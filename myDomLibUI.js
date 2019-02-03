@@ -8,6 +8,7 @@ var eventify = function(arr, callback) {
 
 var globalMonth;
 var globalYear;
+var dayNow;
 
 var calendar = {
     /**
@@ -23,7 +24,7 @@ var calendar = {
 
         this.addCalendarDaysTitle(calendarTable);
 
-        var today = new Date().getDate();
+        dayNow = new Date().getDate();
         var daysInMoth = new Date(globalYear, globalMonth, 0).getDate(); // броя на дните в месеца
         var firstDayOfMoth = new Date(globalYear, globalMonth-1).getDay(); // първия ден от месеца (като ден от седмицата)
         var currentDay = 1; // инициализираме първия ден (брояч), за да попълним календара 
@@ -40,7 +41,7 @@ var calendar = {
                     td.appendClass("calendar-day")
 
                 // отбелязваме днешния ден
-                if(currentDay == today) {
+                if(currentDay == dayNow) {
                     td.appendClass("today");
                 }
 
@@ -57,6 +58,9 @@ var calendar = {
                     var span = td.append("span");
                         span.appendText(currentDay);
                         span.appendClass("calendar-day-label");
+
+                    // атрибут, за да като цъкнем да го вземем на кой ден сме
+                    td.appendAttr("day", currentDay);
                     
                     // div за събитията
                     var div = td.append("div", "day" + currentDay);
@@ -64,6 +68,12 @@ var calendar = {
 
                     // click listener, за да показва pop-up-а
                     td.addEvent("click", function() {
+                        
+                        // ###########################################################
+                        dayNow = this.getAttribute("day");
+                        console.log(dayNow);
+                        // ###########################################################
+
                         myDomLib.get("#popup").removeClass("popup-hidden");
                         myDomLib.get("#popup").appendClass("popup");
                     });
