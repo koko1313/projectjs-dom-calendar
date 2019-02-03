@@ -39,6 +39,7 @@ html, body {
 
 .calendar-day {
     position: relative;
+    cursor: pointer;
 }
 
 .calendar-day-label {
