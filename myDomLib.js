@@ -119,6 +119,14 @@ var myDomLib = {
             },
 
             /**
+             * Премахва клас от елемент
+             * @param {string} className името на класа
+             */
+            removeClass: function(className) {
+                this.element.classList.remove(className);
+            },
+
+            /**
              * Добавя стил към елемент
              * @param {object} styleCollection масив с колекции от вида {property: "color", value: "red"}
              */
