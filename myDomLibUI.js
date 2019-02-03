@@ -6,8 +6,8 @@ var eventify = function(arr, callback) {
     };
 };
 
-var globalMonth;
-var globalYear;
+var monthNow;
+var yearNow;
 var dayNow;
 
 var calendar = {
@@ -25,8 +25,8 @@ var calendar = {
         this.addCalendarDaysTitle(calendarTable);
 
         dayNow = new Date().getDate();
-        var daysInMoth = new Date(globalYear, globalMonth, 0).getDate(); // броя на дните в месеца
-        var firstDayOfMoth = new Date(globalYear, globalMonth-1).getDay(); // първия ден от месеца (като ден от седмицата)
+        var daysInMoth = new Date(yearNow, monthNow, 0).getDate(); // броя на дните в месеца
+        var firstDayOfMoth = new Date(yearNow, monthNow-1).getDay(); // първия ден от месеца (като ден от седмицата)
         var currentDay = 1; // инициализираме първия ден (брояч), за да попълним календара 
         var endMonth = false;
 
@@ -70,8 +70,10 @@ var calendar = {
                     td.addEvent("click", function() {
                         
                         // ###########################################################
-                        var popup = myDomLib.get("#popup");
-                        popup.appendText(dayNow);
+                        dayNow = this.getAttribute("day");
+
+                        var popup = myDomLib.get("#popup-day-now");
+                        popup.appendText(dayNow + "." + monthNow + "." + yearNow, true);
                         // ###########################################################
 
                         myDomLib.get("#popup").removeClass("popup-hidden");
@@ -97,6 +99,9 @@ var calendar = {
     createPopup: function(pushedElement) {
         var popup = pushedElement.append("div", "popup"); // добавяме popup
             popup.appendClass("popup-hidden"); // скриваме го
+
+            popup.append("h1", "popup-day-now");
+
         var popupCloseButton = popup.append("button"); // close бутон
             popupCloseButton.appendText("Close");
             popupCloseButton.addEvent("click", function() {
@@ -119,14 +124,14 @@ var calendar = {
             previousMonthButton.appendText("<");
             
             previousMonthButton.addEvent("click", function(){
-                globalMonth--;
-                if(globalMonth < 1) {
-                    globalMonth = 12;
-                    globalYear--;
+                monthNow--;
+                if(monthNow < 1) {
+                    monthNow = 12;
+                    yearNow--;
                 }
 
                 pushedElement.appendHTML("", true); // изчистваме предишния календар
-                pushedElement.calendar(globalYear, globalMonth);
+                pushedElement.calendar(yearNow, monthNow);
             });
 
         // колона с input полетата на календара
@@ -137,12 +142,12 @@ var calendar = {
         // input с месеца
         var input = td.append("input", "monthInput");
             input.appendClass("calendar-inputs");
-            input.appendAttr("value", globalMonth);
+            input.appendAttr("value", monthNow);
 
         // input с годината
         var input = td.append("input", "yearInput");
             input.appendClass("calendar-inputs");
-            input.appendAttr("value", globalYear);
+            input.appendAttr("value", yearNow);
 
         // бутона на календара
         var button = td.append("button", "calendarGoToButton");
@@ -161,14 +166,14 @@ var calendar = {
             nextMonthButton.appendText(">");
 
             nextMonthButton.addEvent("click", function() {
-                globalMonth++;
-                if(globalMonth > 12) {
-                    globalMonth = 1;
-                    globalYear++;
+                monthNow++;
+                if(monthNow > 12) {
+                    monthNow = 1;
+                    yearNow++;
                 }
 
                 pushedElement.appendHTML("", true); // изчистваме предишния календар
-                pushedElement.calendar(globalYear, globalMonth);
+                pushedElement.calendar(yearNow, monthNow);
             });
     },
 
@@ -211,15 +216,15 @@ eventify(myDomLib.allElements, function() {
 
     pushedElement.calendar = function(year, month) {
         if(year == undefined) {
-            globalYear = new Date().getFullYear();
+            yearNow = new Date().getFullYear();
         } else {
-            globalYear = year;
+            yearNow = year;
         }
 
         if(month == undefined) {
-            globalMonth = new Date().getMonth()+1;
+            monthNow = new Date().getMonth()+1;
         } else {
-            globalMonth = month;
+            monthNow = month;
         }
 
         // рисуваме си календара
