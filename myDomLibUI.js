@@ -70,8 +70,8 @@ var calendar = {
                     td.addEvent("click", function() {
                         
                         // ###########################################################
-                        dayNow = this.getAttribute("day");
-                        console.log(dayNow);
+                        var popup = myDomLib.get("#popup");
+                        popup.appendText(dayNow);
                         // ###########################################################
 
                         myDomLib.get("#popup").removeClass("popup-hidden");
