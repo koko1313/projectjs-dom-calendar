@@ -50,3 +50,16 @@ html, body {
 .today {
     background: red;
 }
+
+.popup {
+    border: 10px solid red;
+    border-radius: 20px;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+}
+
+.popup-hidden {
+    display: none;
+}

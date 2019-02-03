@@ -70,7 +70,20 @@ var calendar = {
             if(endMonth) break;
         }
 
+        this.createPopup(pushedElement);
+
         return calendarTable;
+    },
+
+    createPopup: function(pushedElement) {
+        var popup = pushedElement.append("div", "popup"); // добавяме popup
+            popup.appendClass("popup-hidden"); // скриваме го
+        var popupCloseButton = popup.append("button"); // close бутон
+            popupCloseButton.appendText("Close");
+            popupCloseButton.addEvent("click", function() {
+                popup.removeClass("popup");
+                popup.appendClass("popup-hidden");
+            });
     },
 
     /**
