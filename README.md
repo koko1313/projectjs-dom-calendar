@@ -67,6 +67,12 @@ myElement.appendAttr(attr, attrValue);
 myElement.appenClass(cnassName);
 ```
 
+**Премахване на клас от елемент**
+```javascript
+// className - името на класа
+myElement.removeClass(cnassName);
+```
+
 **Добавяне на стил към елемент**
 ```javascript
 // styleCollection - масив с колекции от вида {property: "color", value: "red"}
