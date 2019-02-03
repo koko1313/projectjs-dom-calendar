@@ -72,8 +72,14 @@ var calendar = {
                         // ###########################################################
                         dayNow = this.getAttribute("day");
 
-                        var popup = myDomLib.get("#popup-day-now");
-                        popup.appendText(dayNow + "." + monthNow + "." + yearNow, true);
+                        var popupDayNow = myDomLib.get("#popupDayNow");
+                        popupDayNow.appendText(dayNow + "." + monthNow + "." + yearNow, true);
+
+                        var popupEventList = myDomLib.get("#popupEventList");
+                        
+                        if(popupEventList.getText().length == 0) {
+                            popupEventList.appendText("Няма събития");
+                        }
                         // ###########################################################
 
                         myDomLib.get("#popup").removeClass("popup-hidden");
@@ -100,7 +106,8 @@ var calendar = {
         var popup = pushedElement.append("div", "popup"); // добавяме popup
             popup.appendClass("popup-hidden"); // скриваме го
 
-            popup.append("h1", "popup-day-now");
+            popup.append("h1", "popupDayNow");
+            popup.append("p", "popupEventList");
 
         var popupCloseButton = popup.append("button"); // close бутон
             popupCloseButton.appendText("Close");
