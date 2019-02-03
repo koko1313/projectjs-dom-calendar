@@ -57,8 +57,16 @@ html, body {
     border-radius: 20px;
     width: 50%;
     position: absolute;
-    top: 0;
+    top: 10px;
     cursor: pointer;
+    background: white;
+    text-align: center;
+    
+    /* за да е центрирано */
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
 .popup-hidden {
