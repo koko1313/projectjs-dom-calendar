@@ -37,6 +37,16 @@ html, body {
     text-align: center;
 }
 
+.calendar-day {
+    position: relative;
+}
+
+.calendar-day-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .today {
     background: red;
 }

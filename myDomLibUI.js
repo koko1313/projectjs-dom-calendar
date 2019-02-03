@@ -37,6 +37,7 @@ var calendar = {
             for(var j=1; j<=7; j++) {
                 // добавяме колона към реда
                 var td = tr.append("td");
+                    td.appendClass("calendar-day")
 
                 // отбелязваме днешния ден
                 if(currentDay == today) {
@@ -52,7 +53,11 @@ var calendar = {
 
                 // добавяме текст към колоната
                 if(currentDay <= daysInMoth) {
-                    td.appendText(currentDay);
+                    var span = td.append("span");
+                        span.appendText(currentDay);
+                        span.appendClass("calendar-day-label");
+                    var div = td.append("div", "day" + currentDay);
+                        div.appendClass("calendar-day-event");
                 }
 
                 if(currentDay == daysInMoth) {
