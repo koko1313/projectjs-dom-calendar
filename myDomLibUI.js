@@ -53,11 +53,20 @@ var calendar = {
 
                 // добавяме текст към колоната
                 if(currentDay <= daysInMoth) {
+                    // числото на деня
                     var span = td.append("span");
                         span.appendText(currentDay);
                         span.appendClass("calendar-day-label");
+                    
+                    // div за събитията
                     var div = td.append("div", "day" + currentDay);
                         div.appendClass("calendar-day-event");
+
+                    // click listener, за да показва pop-up-а
+                    td.addEvent("click", function() {
+                        myDomLib.get("#popup").removeClass("popup-hidden");
+                        myDomLib.get("#popup").appendClass("popup");
+                    });
                 }
 
                 if(currentDay == daysInMoth) {
