@@ -17,7 +17,7 @@ var calendar = {
      */
     drawCalendar: function(pushedElement) {
         var calendarTable = pushedElement.append("table");
-        calendarTable.appendAttr("class", "calendar");
+        calendarTable.appendClass("calendar");
 
         this.addCalendarControls(calendarTable, pushedElement);
 
@@ -40,7 +40,7 @@ var calendar = {
 
                 // отбелязваме днешния ден
                 if(currentDay == today) {
-                    td.appendAttr("class", "today");
+                    td.appendClass("today");
                 }
 
                 // за да стартираме на правилния ден от седмицата
@@ -78,7 +78,7 @@ var calendar = {
 
         // previous month бутона
         var previousMonthButton = tr.append("td", "prevMonthButton");
-            previousMonthButton.appendAttr("class", "calendar-buttons");
+            previousMonthButton.appendClass("calendar-buttons");
             previousMonthButton.appendText("<");
             
             previousMonthButton.addEvent("click", function(){
@@ -99,12 +99,12 @@ var calendar = {
 
         // input с месеца
         var input = td.append("input", "monthInput");
-            input.appendAttr("class", "calendar-inputs");
+            input.appendClass("calendar-inputs");
             input.appendAttr("value", globalMonth);
 
         // input с годината
         var input = td.append("input", "yearInput");
-            input.appendAttr("class", "calendar-inputs");
+            input.appendClass("calendar-inputs");
             input.appendAttr("value", globalYear);
 
         // бутона на календара
@@ -120,7 +120,7 @@ var calendar = {
 
         // next month бутона
         var nextMonthButton = tr.append("td", "nextMonthButton");
-            nextMonthButton.appendAttr("class", "calendar-buttons");
+            nextMonthButton.appendClass("calendar-buttons");
             nextMonthButton.appendText(">");
 
             nextMonthButton.addEvent("click", function() {
@@ -140,31 +140,31 @@ var calendar = {
 
         var td = tr.append("td");
             td.appendText("Пн");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
 
         var td = tr.append("td");
             td.appendText("Вт");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
 
         var td = tr.append("td");
             td.appendText("Ср");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
 
         var td = tr.append("td");
             td.appendText("Чт");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
 
         var td = tr.append("td");
             td.appendText("Пт");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
 
         var td = tr.append("td");
             td.appendText("Сб");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
 
         var td = tr.append("td");
             td.appendText("Нд");
-            td.appendAttr("class", "calendar-day-title");
+            td.appendClass("calendar-day-title");
     },
 };
 

@@ -111,6 +111,14 @@ var myDomLib = {
             },
 
             /**
+             * Добавя клас към елемент
+             * @param {string} className името на класа
+             */
+            appendClass: function(className) {
+                this.element.classList.add(className);
+            },
+
+            /**
              * Добавя стил към елемент
              * @param {object} styleCollection масив с колекции от вида {property: "color", value: "red"}
              */
