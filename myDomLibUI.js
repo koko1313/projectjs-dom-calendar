@@ -137,13 +137,34 @@ var calendar = {
 
     addCalendarDaysTitle: function(calendarTable) {
         var tr = calendarTable.append("tr");
-        tr.append("td").appendText("Пн");
-        tr.append("td").appendText("Вт");
-        tr.append("td").appendText("Ср");
-        tr.append("td").appendText("Чт");
-        tr.append("td").appendText("Пт");
-        tr.append("td").appendText("Сб");
-        tr.append("td").appendText("Нд");
+
+        var td = tr.append("td");
+            td.appendText("Пн");
+            td.appendAttr("class", "calendar-day-title");
+
+        var td = tr.append("td");
+            td.appendText("Вт");
+            td.appendAttr("class", "calendar-day-title");
+
+        var td = tr.append("td");
+            td.appendText("Ср");
+            td.appendAttr("class", "calendar-day-title");
+
+        var td = tr.append("td");
+            td.appendText("Чт");
+            td.appendAttr("class", "calendar-day-title");
+
+        var td = tr.append("td");
+            td.appendText("Пт");
+            td.appendAttr("class", "calendar-day-title");
+
+        var td = tr.append("td");
+            td.appendText("Сб");
+            td.appendAttr("class", "calendar-day-title");
+
+        var td = tr.append("td");
+            td.appendText("Нд");
+            td.appendAttr("class", "calendar-day-title");
     },
 };
 
