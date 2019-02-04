@@ -141,7 +141,7 @@ var myDomLib = {
              * @returns {object} родителския елемент
              */
             getParent: function() {
-                return this.element.parentElement;
+                return myDomLib.get(this.element.parentElement);
             },
 
             /**
@@ -149,7 +149,7 @@ var myDomLib = {
              * @returns {object} следващия елемент
              */
             getNextSibling: function() {
-                return this.element.nextElementSibling;
+                return myDomLib.get(this.element.nextElementSibling);
             },
 
             /**
@@ -157,7 +157,7 @@ var myDomLib = {
              * @returns {object} предишния елемент
              */
             getPreviousSibling: function() {
-                return this.element.previousElementSibling;
+                return myDomLib.get(this.element.previousElementSibling);
             },
 
             /**
