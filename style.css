@@ -72,3 +72,15 @@ html, body {
 .popup-hidden {
     display: none;
 }
+
+.date-picker {
+
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}

@@ -9,6 +9,7 @@ var eventify = function(arr, callback) {
 var monthNow;
 var yearNow;
 var dayNow;
+var isInput;
 
 var calendar = {
     /**
@@ -16,7 +17,7 @@ var calendar = {
      * @param {object} pushedElement елемента, в който ще се създава календара
      * @returns {object} html table, представляваща календара
      */
-    drawCalendar: function(pushedElement) {
+    drawCalendar: function(pushedElement, isDatePicker) {
         var calendarTable = pushedElement.append("table");
         calendarTable.appendClass("calendar");
 
@@ -66,25 +67,36 @@ var calendar = {
                     var div = td.append("div", "day" + currentDay);
                         div.appendClass("calendar-day-event");
 
-                    // click listener, за да показва pop-up-а
-                    td.addEvent("click", function() {
-                        
-                        // ###########################################################
-                        dayNow = this.getAttribute("day");
+                    if(isDatePicker) {
+                        // click listener, за да попълва input-а
+                        td.addEvent("click", function() {
+                            dayNow = this.getAttribute("day");
+                            var input = myDomLib.get("[datePicker]").element;
+                            input.value = dayNow + "." + monthNow + "." + yearNow;
+                            myDomLib.get("#datePicker").removeClass("display-block");
+                            myDomLib.get("#datePicker").appendClass("display-none");
+                        });
+                    } else {
+                        // click listener, за да показва pop-up-а
+                        td.addEvent("click", function() {
+                            
+                            // ###########################################################
+                            dayNow = this.getAttribute("day");
 
-                        var popupDayNow = myDomLib.get("#popupDayNow");
-                        popupDayNow.appendText(dayNow + "." + monthNow + "." + yearNow, true);
+                            var popupDayNow = myDomLib.get("#popupDayNow");
+                            popupDayNow.appendText(dayNow + "." + monthNow + "." + yearNow, true);
 
-                        var popupEventList = myDomLib.get("#popupEventList");
-                        
-                        if(popupEventList.getText().length == 0) {
-                            popupEventList.appendText("Няма събития");
-                        }
-                        // ###########################################################
+                            var popupEventList = myDomLib.get("#popupEventList");
+                            
+                            if(popupEventList.getText().length == 0) {
+                                popupEventList.appendText("Няма събития");
+                            }
+                            // ###########################################################
 
-                        myDomLib.get("#popup").removeClass("popup-hidden");
-                        myDomLib.get("#popup").appendClass("popup");
-                    });
+                            myDomLib.get("#popup").removeClass("popup-hidden");
+                            myDomLib.get("#popup").appendClass("popup");
+                        });
+                    }
                 }
 
                 if(currentDay == daysInMoth) {
@@ -234,8 +246,32 @@ eventify(myDomLib.allElements, function() {
             monthNow = month;
         }
 
-        // рисуваме си календара
-        calendar.drawCalendar(pushedElement);
+        if(pushedElement.element.nodeName == "INPUT" || isInput) {
+            var parent = pushedElement.getParent();
+
+            // прикачваме атрибут на input-а
+            pushedElement.appendAttr("datePicker", "true");
+            
+            pushedElement.addEvent("focus", function() {
+                datePicker.removeClass("display-none");
+                datePicker.appendClass("display-block");
+            });
+
+            var datePicker = myDomLib.get("#datePicker");
+            if(datePicker.element == null) {
+            var datePicker = parent.append("div", "datePicker");
+                    datePicker.appendClass("date-picker");
+                    datePicker.appendClass("display-none");
+            }
+
+            // рисуваме си календара като datePicker (true)
+            calendar.drawCalendar(datePicker, true);
+
+            isInput = true;
+        } else {
+            // рисуваме си календара
+            calendar.drawCalendar(pushedElement);
+        }
     };
 
 });
