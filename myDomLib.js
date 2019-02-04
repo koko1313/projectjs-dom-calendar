@@ -7,7 +7,7 @@ var myDomLib = {
 
     /**
      * Връща елемент по зададено id
-     * @param {string} element #id или .class на елемента (при .class връща само първия срещнат)
+     * @param {string} element #id или .class на елемента (при .class връща само първия срещнат) или зададен атрибут ([)
      * @returns {object} връща обекта, съдържащ елемента, заедно с всички негови методи
      */
     get: function(element) {
@@ -17,7 +17,7 @@ var myDomLib = {
 
             // set-ва елемента
             set: function(element) {
-                if(element[0] == "#" || element[0] == ".") {
+                if(element[0] == "#" || element[0] == "." || element[0] == "[") {
                     elementObject.element = document.querySelector(element);
                 } else {
                     elementObject.element = element;
