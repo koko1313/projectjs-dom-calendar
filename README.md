@@ -108,6 +108,7 @@ myElement.addEvent(event, callback);
 
 ## myDomLibUI.js - Функционалности с примери
 **Указване на календар**
+> ако myElement е от тип input - календара става date picker
 ```javascript
 myElement.calendar(); // календар с текущата дата
 myElement.calendar(year, month); // календар с указани година и месец
