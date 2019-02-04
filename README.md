@@ -14,7 +14,7 @@
 
 **Взимане на елемент от DOM дървото**
 ```javascript
-var myElement = myDomLib.get(element); // element - id (#), class (.) или атрибут ([)
+var myElement = myDomLib.get(element); // element - id (#), class (.) или атрибут ([attribure])
 ```
 
 **Взимане на поделемент от DOM дървото**
