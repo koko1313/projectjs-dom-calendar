@@ -10,6 +10,7 @@ var monthNow;
 var yearNow;
 var dayNow;
 var isInput;
+var eventsCollection;
 
 var calendar = {
     /**
@@ -67,6 +68,16 @@ var calendar = {
                     var div = td.append("div", "day" + currentDay);
                         div.appendClass("calendar-day-event");
 
+                        // обхождаме всички събития
+                        for(var k=0; k<eventsCollection.length; k++) {
+                            var event = eventsCollection[k];
+                            // проверяваме дали са за текущия ден
+                            if(event.year == yearNow && event.month == monthNow && event.day == currentDay) {
+                                var p = div.append("p");
+                                p.appendText(event.event);
+                            }
+                        }
+
                     if(isDatePicker) {
                         // click listener, за да попълва input-а
                         td.addEvent("click", function() {
@@ -87,7 +98,18 @@ var calendar = {
                             popupDayNow.appendText(dayNow + "." + monthNow + "." + yearNow, true);
 
                             var popupEventList = myDomLib.get("#popupEventList");
-                            
+                            popupEventList.appendText("", true); // изчистваме го
+
+                            // обхождаме всички събития
+                            for(var k=0; k<eventsCollection.length; k++) {
+                                var event = eventsCollection[k];
+                                // проверяваме дали са за текущия ден
+                                if(event.year == yearNow && event.month == monthNow && event.day == dayNow) {
+                                    var p = popupEventList.append("p");
+                                    p.appendText(event.event);
+                                }
+                            }
+
                             if(popupEventList.getText().length == 0) {
                                 popupEventList.appendText("Няма събития");
                             }
@@ -234,16 +256,25 @@ eventify(myDomLib.allElements, function() {
     var pushedElement = myDomLib.allElements[myDomLib.allElements.length-1];
 
     pushedElement.calendar = function(year, month) {
-        if(year == undefined) {
+        if(!Number.isInteger(year) || year == undefined) {
             yearNow = new Date().getFullYear();
         } else {
-            yearNow = year;
+            if(Number.isInteger(year)) {
+                yearNow = year;
+            }
+        }
+        
+        // събития
+        if(Array.isArray(year)) {
+            eventsCollection = year;
         }
 
         if(month == undefined) {
             monthNow = new Date().getMonth()+1;
         } else {
-            monthNow = month;
+            if(Number.isInteger(month)) {
+                monthNow = month;
+            }
         }
 
         if(pushedElement.element.nodeName == "INPUT" || isInput) {

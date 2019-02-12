@@ -112,4 +112,10 @@ myElement.addEvent(event, callback);
 ```javascript
 myElement.calendar(); // календар с текущата дата
 myElement.calendar(year, month); // календар с указани година и месец
+
+// календар със списък от събития
+myElement.calendar([
+    {day: 1, month: 1, year: 2019, event: "Event name"},
+    {day: 2, month: 1, year: 2019, event: "Event name 2"},
+]);
 ```
