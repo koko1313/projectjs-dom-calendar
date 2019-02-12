@@ -49,11 +49,11 @@ html, body {
 }
 
 .today {
-    background: red;
+    background: yellow;
 }
 
 .popup {
-    border: 10px solid red;
+    border: 10px solid yellow;
     border-radius: 20px;
     width: 50%;
     position: absolute;
